@@ -23,11 +23,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      model_id: {
+      car_model_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        references: { model: 'models', key: 'id' },
+        references: { model: 'car-models', key: 'id' },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
