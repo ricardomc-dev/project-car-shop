@@ -2,8 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "app para plataforma de compra e venda de veículos",
-  "main": "index.js",
+  "main": "./build/server",
   "scripts": {
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
     "start": "ts-node-dev --transpile-only ./src/server.ts",
