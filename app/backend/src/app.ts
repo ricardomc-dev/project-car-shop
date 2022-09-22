@@ -1,14 +1,7 @@
 import express, {Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-// import UserController from './controllers/user-controller';
-// import UserService from './services/user-service';
-// import EmailValidator from './services/email-validator';
-// import TokenGenerator from './services/token-generator';
-// import TicketController from './controllers/ticket-controller';
-// import TicketService from './services/ticket-service';
-// import Jwt from './middlewares/jwt';
-// import CablewayController from './controllers/cableway-controller';
-// import CablewayService from './services/cableway-service';
+import router from './routes';
+
 
 // const emailValidator = new EmailValidator();
 // const tokenGenerator = new TokenGenerator();
@@ -24,6 +17,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(router);
 
 
 
