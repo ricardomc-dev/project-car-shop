@@ -1,13 +1,14 @@
 import UserModel from '../database/models/User';
 
 class UserService {
-  constructor(private emailValidator: any, private tokenGenerator: any) {
-    this.emailValidator = emailValidator;
+  
+  constructor(private userValidator: any, private tokenGenerator: any) {
+    this.userValidator = userValidator;
     this.tokenGenerator = tokenGenerator;
   }
 
   async register(body: any) {
-    this.emailValidator.valid(body.email);
+    this.userValidator.valid(body);
 
     const validEmail = await UserModel.findOne({ where: { email: body.email } });
 
@@ -21,6 +22,7 @@ class UserService {
   }
 
   async login({ email, password }: any) {
+    
     const user = await UserModel
       .findOne({ where: { email, password }, attributes: { exclude: ['password'] } });
 
@@ -28,7 +30,7 @@ class UserService {
       throw new Error('Invalid User');
     }
 
-    const token = this.tokenGenerator.generate({ id: user.id });
+    const token = this.tokenGenerator.generate({ id: user.id, role: user.role });
 
     return token;
   }

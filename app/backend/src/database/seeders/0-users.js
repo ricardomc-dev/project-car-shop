@@ -4,20 +4,20 @@ module.exports = {
       [
         {
           name: "Car Shop Admin",
-          email: "adm@carshop.com",
-          password: "adm2@22",
+          email: "admin@carshop.com",
+          password: "admin1234",
           role: "administrator"
         }, 
         {
-          name: "Fulana Silva",
-          email: "fulana@carshop.com",
-          password: "fulana@123",
+          name: "Edson Nascimento",
+          email: "pele@carshop.com",
+          password: "seller1234",
           role: "seller"
         }, 
         {
-          name: "Cliente Maria Gasolina",
-          email: "mgasolina@email.com",
-          password: "$#gas#$",
+          name: "Ayrton Senna",
+          email: "senna@gmail.com",
+          password: "customer1234",
           role: "customer"
         },
       ],
