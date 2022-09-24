@@ -1,7 +1,12 @@
 export interface ICarModel {
-  id: number;
+  id?: number;
   carModelName: string;
-  brandId: number;
-  groupId: number;
+  brandId?: number;
+  groupId?: number;
   urlImage: string;
+}
+
+export interface ICarModelBody extends ICarModel {
+  brandName: string;
+  groupName: string;
 }

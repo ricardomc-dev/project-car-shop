@@ -1,11 +1,11 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import ConfigService from '../services/order-service';
-import ConfigController from '../controllers/order-controller';
+import ConfigService from '../services/config-service';
+import ConfigController from '../controllers/config-controller';
+import ConfigValidator from '../utils/config-validator';
 import Token from '../utils/token';
-import OrderValidator from '../utils/order-validator';
 
-const orderValidator = new OrderValidator();
-const service = new ConfigService(orderValidator);
+const configValidator = new ConfigValidator();
+const service = new ConfigService(configValidator);
 const controller = new ConfigController(service);
 
 const token = new Token();
@@ -51,13 +51,13 @@ configRoute.get('/colors', token.validate,
 // Registra um modelo de veículos
 configRoute.post('/models', token.validate,
   (req: Request, res: Response, next: NextFunction) => {
-  controller.createModel(req, res, next);
+  controller.createCarModel(req, res, next);
 });
 
 // Recupera todos os modelos de veículos
 configRoute.get('/models', token.validate,
   (req: Request, res: Response, next: NextFunction) => {
-  controller.readModels(req, res, next);
+  controller.readCarModels(req, res, next);
 });
 
 export default configRoute;
