@@ -1,6 +1,6 @@
 export interface IVehicle {
   id: number;
-  license_plate: string;
+  licensePlate: string;
   chassi: string;
   renavam: number;
   year: number;

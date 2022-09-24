@@ -6,10 +6,10 @@ import Group from './Group';
 
 class CarModel extends Model implements ICarModel {
   public id!: number;
-  public car_model_name!: string;
-  public brand_id!: number;
-  public group_id!: number;
-  public url_image!: string;
+  public carModelName!: string;
+  public brandId!: number;
+  public groupId!: number;
+  public urlImage!: string;
 }
 
 CarModel.init(
@@ -20,11 +20,21 @@ CarModel.init(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    car_model_name: {
+    carModelName: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    url_image: {
+    brandId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    groupId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    urlImage: {
       allowNull: false,
       type: DataTypes.STRING,
     },
@@ -37,7 +47,7 @@ CarModel.init(
   },
 );
 
-CarModel.hasMany(Brand, { foreignKey: 'brand_id', as: 'brand' });
-CarModel.hasMany(Group, { foreignKey: 'group_id', as: 'group' });
+// CarModel.hasMany(Brand, { foreignKey: 'brand_id', as: 'brand' });
+// CarModel.hasMany(Group, { foreignKey: 'group_id', as: 'group' });
 
 export default CarModel;

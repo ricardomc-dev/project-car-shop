@@ -4,7 +4,7 @@ import { IColor } from '../../interfaces/IColor';
 
 class Color extends Model implements IColor {
   public id!: number;
-  public color_name!: string;
+  public colorName!: string;
 }
 
 Color.init(
@@ -15,7 +15,7 @@ Color.init(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    color_name: {
+    colorName: {
       allowNull: false,
       type: DataTypes.STRING(255),
     }

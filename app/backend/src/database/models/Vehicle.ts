@@ -1,15 +1,17 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
 import { IVehicle } from '../../interfaces/IVehicle';
-import CarModel from './CarModel';
-import Color from './Color';
+// import CarModel from './CarModel';
+// import Color from './Color';
 
 class Vehicle extends Model implements IVehicle {
   public id!: number;
-  public license_plate!: string;
+  public licensePlate!: string;
   public chassi!: string;
   public renavam!: number;
   public year!: number;
+  public carModelId!: number;
+  public colorId!: number;
   public mileage!: number;
   public price!: number;
 }
@@ -22,7 +24,7 @@ Vehicle.init(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    license_plate: {
+    licensePlate: {
       allowNull: false,
       type: DataTypes.STRING,
     },
@@ -37,6 +39,16 @@ Vehicle.init(
     year: {
       allowNull: false,
       type: DataTypes.INTEGER,
+    },
+    carModelId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    colorId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      primaryKey: true,
     },
     mileage: {
       allowNull: false,
@@ -55,7 +67,7 @@ Vehicle.init(
   },
 );
 
-Vehicle.hasMany(CarModel, { foreignKey: 'car_model_id', as: 'car_model' });
-Vehicle.hasMany(Color, { foreignKey: 'color_id', as: 'color' });
+// Vehicle.hasMany(CarModel, { foreignKey: 'car_model_id', as: 'car_model' });
+// Vehicle.hasMany(Color, { foreignKey: 'color_id', as: 'color' });
 
 export default Vehicle;

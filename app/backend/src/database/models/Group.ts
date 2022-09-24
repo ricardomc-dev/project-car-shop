@@ -4,7 +4,7 @@ import { IGroup } from '../../interfaces/IGroup';
 
 class Group extends Model implements IGroup {
   public id!: number;
-  public group_name!: string;
+  public groupName!: string;
 }
 
 Group.init(
@@ -15,7 +15,7 @@ Group.init(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    group_name: {
+    groupName: {
       allowNull: false,
       type: DataTypes.STRING(255),
     }

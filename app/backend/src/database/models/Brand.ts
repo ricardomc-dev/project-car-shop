@@ -4,7 +4,7 @@ import { IBrand } from '../../interfaces/IBrand';
 
 class Brand extends Model implements IBrand {
   public id!: number;
-  public brand_name!: string;
+  public brandName!: string;
 }
 
 Brand.init(
@@ -15,7 +15,7 @@ Brand.init(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    brand_name: {
+    brandName: {
       allowNull: false,
       type: DataTypes.STRING(255),
     }
