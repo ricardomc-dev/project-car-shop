@@ -2,9 +2,9 @@ import UserModel from '../database/models/User';
 
 class UserService {
   
-  constructor(private userValidator: any, private tokenGenerator: any) {
+  constructor(private userValidator: any, private token: any) {
     this.userValidator = userValidator;
-    this.tokenGenerator = tokenGenerator;
+    this.token = token;
   }
 
   async register(body: any) {
@@ -30,7 +30,7 @@ class UserService {
       throw new Error('Invalid User');
     }
 
-    const token = this.tokenGenerator.generate({ id: user.id, role: user.role });
+    const token = this.token.generate({ id: user.id, role: user.role });
 
     return token;
   }

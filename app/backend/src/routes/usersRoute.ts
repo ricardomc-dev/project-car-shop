@@ -2,11 +2,11 @@ import { Router, Request, Response } from 'express';
 import UserService from '../services/user-service';
 import UserController from '../controllers/user-controller';
 import UserValidator from '../utils/user-validator';
-import TokenGenerator from '../utils/token-generator';
+import Token from '../utils/token';
 
 const emailValidator = new UserValidator();
-const tokenGenerator = new TokenGenerator();
-const service = new UserService(emailValidator, tokenGenerator);
+const token = new Token();
+const service = new UserService(emailValidator, token);
 const controller = new UserController(service);
 
 const registerRoute = Router();
