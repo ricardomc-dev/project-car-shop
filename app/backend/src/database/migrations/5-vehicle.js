@@ -17,7 +17,7 @@ module.exports = {
       },
       renavam: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       year: {
         allowNull: false,

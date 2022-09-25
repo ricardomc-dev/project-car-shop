@@ -8,7 +8,7 @@ class Vehicle extends Model implements IVehicle {
   public id!: number;
   public licensePlate!: string;
   public chassi!: string;
-  public renavam!: number;
+  public renavam!: string;
   public year!: number;
   public carModelId!: number;
   public colorId!: number;
@@ -34,7 +34,7 @@ Vehicle.init(
     },
     renavam: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     year: {
       allowNull: false,

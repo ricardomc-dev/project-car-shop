@@ -1,11 +1,16 @@
 export interface IVehicle {
-  id: number;
+  id?: number;
   licensePlate: string;
   chassi: string;
-  renavam: number;
+  renavam: string;
   year: number;
-  carModelId: number;
-  colorId: number;
+  carModelId?: number;
+  colorId?: number;
   mileage: number;
   price: number;
+}
+
+export interface IVehicleBody extends IVehicle {
+  carModelName: string;
+  colorName: string;
 }

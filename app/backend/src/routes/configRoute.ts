@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import ConfigService from '../services/config-service';
 import ConfigController from '../controllers/config-controller';
 import ConfigValidator from '../utils/config-validator';
-import Token from '../utils/token';
+import Token from '../middlewares/token';
 
 const configValidator = new ConfigValidator();
 const service = new ConfigService(configValidator);
