@@ -1,7 +1,7 @@
 export interface IOrder {
   userId?: number;
   sellerId?: number;
-  vehicleId: number;
+  vehicleId?: number;
   status: string;
 }
 

@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import OrderService from '../services/order-service';
 import OrderController from '../controllers/order-controller';
-import Token from '../utils/token';
+import Token from '../middlewares/token';
 import OrderValidator from '../utils/order-validator';
 
 const orderValidator = new OrderValidator();
