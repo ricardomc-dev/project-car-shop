@@ -13,7 +13,7 @@ class UserService {
     const validEmail = await UserModel.findOne({ where: { email: body.email } });
 
     if (validEmail) {
-      throw new Error('email is used');
+      throw new Error('UserFound');
     }
 
     const user = await UserModel.create(body);
@@ -27,7 +27,7 @@ class UserService {
       .findOne({ where: { email, password }, attributes: { exclude: ['password'] } });
 
     if (!user) {
-      throw new Error('Invalid User');
+      throw new Error('Invalid login');
     }
 
     const token = this.token.generate({ id: user.id, role: user.role });

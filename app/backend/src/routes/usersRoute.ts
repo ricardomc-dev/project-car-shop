@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import UserService from '../services/user-service';
 import UserController from '../controllers/user-controller';
 import UserValidator from '../utils/user-validator';
@@ -13,13 +13,13 @@ const registerRoute = Router();
 const loginRoute = Router();
 
 // Registra um usuário
-registerRoute.post('/', (req: Request, res: Response) => {
-  controller.register(req, res);
+registerRoute.post('/', (req: Request, res: Response, next: NextFunction) => {
+  controller.register(req, res, next);
 });
 
 // Registra login de usuário
-loginRoute.post('/', (req: Request, res: Response) => {
-  controller.login(req, res);
+loginRoute.post('/', (req: Request, res: Response, next: NextFunction) => {
+  controller.login(req, res, next);
 });
 
 export {

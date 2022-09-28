@@ -13,7 +13,7 @@ class AdminService implements IAdminService {
     const validEmail = await UserModel.findOne({ where: { email: data.email } });
 
     if (validEmail) {
-      throw new Error('email is used');
+      throw new Error('UserFound');
     }
 
     const user = await UserModel.create(data);
@@ -27,11 +27,10 @@ class AdminService implements IAdminService {
   }
 
   async deleteUser(id: string): Promise<void> {
-    const deleteUser = await UserModel.destroy({
-      where: { id }
-    })
+    const user = await UserModel.findOne({ where: { id } });
+    if (!user) throw new Error('UserNotFound');
 
-    if (!deleteUser) throw new Error('UserNotFound');
+    await UserModel.destroy({ where: { id } })
   }
 }
 

@@ -39,6 +39,7 @@ class OrderService implements IOrderService {
 
   async readOneOrder(id: string): Promise<object | null> {
     const order = await Order.findOne({ where: { id }});
+    if (!order) throw new Error('OrderNotFound');
     return order;
   }
 
