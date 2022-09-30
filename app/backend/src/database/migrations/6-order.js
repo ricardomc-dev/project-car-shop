@@ -7,29 +7,32 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         foreignKey: true,
-        references: { model: 'users', key: 'id'},
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-      },
-      seller_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        foreignKey: true,
+        onUpdate: 'CASCADE',
+        field: 'user_id',
         references: { model: 'users', key: 'id'},
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
       },
-      vehicle_id: {
+      sellerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        foreignKey: true,
+        // foreignKey: true,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        field: 'seller_id',
+        references: { model: 'users', key: 'id'},
+      },
+      vehicleId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        // foreignKey: true,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        field: 'vehicle_id',
         references: { model: 'vehicles', key: 'id'},
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
       },
       status: {
         type: Sequelize.STRING(50),

@@ -7,9 +7,10 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
       },
-      license_plate: {
+      licensePlate: {
         allowNull: false,
         type: Sequelize.STRING,
+        field: 'license_plate',
       },
       chassi: {
         allowNull: false,
@@ -23,21 +24,23 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      car_model_id: {
+      carModelId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        field: 'car_model_id',
         references: { model: 'car-models', key: 'id' },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
       },
-      color_id: {
+      colorId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        references: { model: 'colors', key: 'id'},
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
+        field: 'color_id',
+        references: { model: 'colors', key: 'id'},
       },
       mileage: {
         allowNull: false,

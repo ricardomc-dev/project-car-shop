@@ -47,12 +47,25 @@ class VehicleService implements IVehicleService {
   }
 
   async readVehicles(): Promise<object[]> {
-    const vehicles = await Vehicle.findAll();
+    const vehicles = await Vehicle.findAll({
+      include: [
+        { model: CarModel, as: 'model', attributes: { exclude: ['id'] } },
+        { model: Color, as: 'color', attributes: { exclude: ['id'] } },
+      ],
+      attributes: { exclude: ['carModelId', 'colorId'] },
+    });
     return vehicles;
   }
 
   async readOneVehicle(id: string): Promise<object | null> {
-    const vehicle = await Vehicle.findOne({ where: { id }});
+    const vehicle = await Vehicle.findOne({ 
+      where: { id },
+      include: [
+        { model: CarModel, as: 'model', attributes: { exclude: ['id'] } },
+        { model: Color, as: 'color', attributes: { exclude: ['id'] } },
+      ],
+      attributes: { exclude: ['carModelId', 'colorId'] },
+    });
     if (!vehicle) throw new Error('VehicleNotFound')
     return vehicle;
   }

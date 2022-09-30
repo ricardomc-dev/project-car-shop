@@ -1,5 +1,6 @@
 import Order from "../database/models/Order";
 import User from "../database/models/User";
+import Vehicle from "../database/models/Vehicle";
 import { IOrder, IOrderBody } from "../interfaces/IOrder";
 import { IOrderService } from "../interfaces/IOrderService";
 
@@ -33,12 +34,26 @@ class OrderService implements IOrderService {
   }
 
   async readOrders(): Promise<object[]> {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['id', 'password'] } },
+        { model: User, as: 'seller', attributes: { exclude: ['id', 'password'] } },
+        { model: Vehicle, as: 'vehicle', attributes: { exclude: ['id'] } },
+      ],
+      attributes: { exclude: ['userId', 'sellerId', 'vehicleId'] },
+    });
     return orders;
   }
 
   async readOneOrder(id: string): Promise<object | null> {
-    const order = await Order.findOne({ where: { id }});
+    const order = await Order.findByPk(id, {
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['id', 'password'] } },
+        { model: User, as: 'seller', attributes: { exclude: ['id', 'password'] } },
+        { model: Vehicle, as: 'vehicle', attributes: { exclude: ['id'] } },
+      ],
+      attributes: { exclude: ['userId', 'sellerId', 'vehicleId'] },
+    });
     if (!order) throw new Error('OrderNotFound');
     return order;
   }

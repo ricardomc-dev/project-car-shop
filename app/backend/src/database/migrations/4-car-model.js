@@ -7,29 +7,33 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
       },
-      car_model_name: {
+      carModelName: {
         allowNull: false,
         type: Sequelize.STRING,
+        field: 'car_model_name',
       },
-      brand_id: {
+      brandId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
+        foreignKey: true,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        field: 'brand_id',
         references: { model: 'brands', key: 'id' },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
       },
-      group_id: {
+      groupId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
-        references: { model: 'groups', key: 'id'},
+        foreignKey: true,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
+        field: 'group_id',
+        references: { model: 'groups', key: 'id'},
       },
-      url_image: {
+      urlImage: {
         allowNull: false,
         type: Sequelize.STRING(200),
+        field: 'url_image',
       },
     });
   },

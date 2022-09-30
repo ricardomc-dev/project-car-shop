@@ -7,9 +7,10 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
       },
-      color_name: {
+      colorName: {
         allowNull: false,
         type: Sequelize.STRING,
+        field: 'color_name',
       }
     });
   },
