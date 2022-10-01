@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, _Sequelize) => {
-    await queryInterface.bulkInsert('car-models',
+    await queryInterface.bulkInsert('car_models',
       [
         {
           car_model_name: "320i",
@@ -308,6 +308,6 @@ module.exports = {
   },
 
   down: async (queryInterface, _Sequelize) => {
-    await queryInterface.bulkDelete('car-models', null, {});
+    await queryInterface.bulkDelete('car_models', null, {});
   }
 };

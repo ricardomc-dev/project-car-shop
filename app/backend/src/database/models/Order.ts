@@ -20,19 +20,6 @@ Order.init(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    // userId: {
-    //   allowNull: false,
-    //   type: DataTypes.INTEGER,
-    // },
-    // sellerId: {
-    //   allowNull: false,
-    //   unique: true,
-    //   type: DataTypes.INTEGER,
-    // },
-    // vehicleId: {
-    //   allowNull: false,
-    //   type: DataTypes.INTEGER,
-    // },
     status: {
       allowNull: false,
       type: DataTypes.STRING(100),

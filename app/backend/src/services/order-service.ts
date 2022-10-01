@@ -1,3 +1,7 @@
+import Brand from "../database/models/Brand";
+import CarModel from "../database/models/CarModel";
+import Color from "../database/models/Color";
+import Group from "../database/models/Group";
 import Order from "../database/models/Order";
 import User from "../database/models/User";
 import Vehicle from "../database/models/Vehicle";
@@ -38,7 +42,21 @@ class OrderService implements IOrderService {
       include: [
         { model: User, as: 'user', attributes: { exclude: ['id', 'password'] } },
         { model: User, as: 'seller', attributes: { exclude: ['id', 'password'] } },
-        { model: Vehicle, as: 'vehicle', attributes: { exclude: ['id'] } },
+        { model: Vehicle,
+          as: 'vehicle',
+          attributes: { exclude: ['id', 'carModelId', 'colorId'] },
+          include: [
+            { model: CarModel,
+              as: 'model',
+              attributes: { exclude: ['id', 'brandId', 'groupId'] },
+              include: [
+                { model: Brand, as: 'brand', attributes: { exclude: ['id'] } },
+                { model: Group, as: 'group', attributes: { exclude: ['id'] } },
+              ],
+            },
+            { model: Color, as: 'color', attributes: { exclude: ['id'] } },
+          ],
+         },
       ],
       attributes: { exclude: ['userId', 'sellerId', 'vehicleId'] },
     });
@@ -50,7 +68,21 @@ class OrderService implements IOrderService {
       include: [
         { model: User, as: 'user', attributes: { exclude: ['id', 'password'] } },
         { model: User, as: 'seller', attributes: { exclude: ['id', 'password'] } },
-        { model: Vehicle, as: 'vehicle', attributes: { exclude: ['id'] } },
+        { model: Vehicle,
+          as: 'vehicle',
+          attributes: { exclude: ['id', 'carModelId', 'colorId'] },
+          include: [
+            { model: CarModel,
+              as: 'model',
+              attributes: { exclude: ['id', 'brandId', 'groupId'] },
+              include: [
+                { model: Brand, as: 'brand', attributes: { exclude: ['id'] } },
+                { model: Group, as: 'group', attributes: { exclude: ['id'] } },
+              ],
+            },
+            { model: Color, as: 'color', attributes: { exclude: ['id'] } },
+          ],
+         },
       ],
       attributes: { exclude: ['userId', 'sellerId', 'vehicleId'] },
     });

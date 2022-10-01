@@ -3,6 +3,8 @@ import Color from "../database/models/Color";
 import CarModel from "../database/models/CarModel";
 import { IVehicle, IVehicleBody } from "../interfaces/IVehicle";
 import { IVehicleService } from "../interfaces/IVehicleService";
+import Brand from "../database/models/Brand";
+import Group from "../database/models/Group";
 
 class VehicleService implements IVehicleService {
   constructor(private vehicleValidator: any) {
@@ -49,7 +51,14 @@ class VehicleService implements IVehicleService {
   async readVehicles(): Promise<object[]> {
     const vehicles = await Vehicle.findAll({
       include: [
-        { model: CarModel, as: 'model', attributes: { exclude: ['id'] } },
+        { model: CarModel,
+          as: 'model',
+          attributes: { exclude: ['id', 'brandId', 'groupId'] },
+          include: [
+            { model: Brand, as: 'brand', attributes: { exclude: ['id'] } },
+            { model: Group, as: 'group', attributes: { exclude: ['id'] } },
+          ],
+        },
         { model: Color, as: 'color', attributes: { exclude: ['id'] } },
       ],
       attributes: { exclude: ['carModelId', 'colorId'] },
@@ -61,7 +70,14 @@ class VehicleService implements IVehicleService {
     const vehicle = await Vehicle.findOne({ 
       where: { id },
       include: [
-        { model: CarModel, as: 'model', attributes: { exclude: ['id'] } },
+        { model: CarModel,
+          as: 'model',
+          attributes: { exclude: ['id', 'brandId', 'groupId'] },
+          include: [
+            { model: Brand, as: 'brand', attributes: { exclude: ['id'] } },
+            { model: Group, as: 'group', attributes: { exclude: ['id'] } },
+          ],
+        },
         { model: Color, as: 'color', attributes: { exclude: ['id'] } },
       ],
       attributes: { exclude: ['carModelId', 'colorId'] },

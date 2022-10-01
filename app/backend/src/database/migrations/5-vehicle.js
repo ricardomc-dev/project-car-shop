@@ -31,7 +31,7 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
         field: 'car_model_id',
-        references: { model: 'car-models', key: 'id' },
+        references: { model: 'car_models', key: 'id' },
       },
       colorId: {
         type: Sequelize.INTEGER,
