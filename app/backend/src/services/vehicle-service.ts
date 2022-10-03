@@ -66,7 +66,7 @@ class VehicleService implements IVehicleService {
     return vehicles;
   }
 
-  async readOneVehicle(id: string): Promise<object | null> {
+  async readOneVehicle(id: number | undefined): Promise<object | null> {
     const vehicle = await Vehicle.findOne({ 
       where: { id },
       include: [
@@ -86,7 +86,7 @@ class VehicleService implements IVehicleService {
     return vehicle;
   }
 
-  async updateVehicle(id: string, data: object): Promise<void> {
+  async updateVehicle(id: number, data: object): Promise<void> {
     const [updateVehicle] = await Vehicle.update(
       { ...data },
       { where: { id } }
