@@ -11,17 +11,6 @@ const vehicleMock: IVehicleBody = {
   price: 40000,
 }
 
-const invalidVehicleMock: IVehicleBody = {
-  licensePlate: 'xxx',
-  chassi: '9BRQWERTYU0107789',
-  renavam: '00123456789',
-  year: 2017,
-  carModelName: 'Kwid',
-  colorName: 'Bege',
-  mileage: 19500,
-  price: 40000,
-}
-
 const vehicleMockWithId: IVehicle = {
   id: 1,
   licensePlate: 'ABC2D34',
@@ -35,18 +24,6 @@ const vehicleMockWithId: IVehicle = {
 }
 
 const vehicleMockForChange: IVehicle = {
-  licensePlate: 'ABC2D34',
-  chassi: '9BRQWERTYU0107789',
-  renavam: '00123456789',
-  year: 2017,
-  carModelId: 39,
-  colorId: 3,
-  mileage: 25000,
-  price: 30000,
-}
-
-const vehicleMockForChangeWithId: IVehicle = {
-  id: 1,
   licensePlate: 'ABC2D34',
   chassi: '9BRQWERTYU0107789',
   renavam: '00123456789',
@@ -84,10 +61,8 @@ const allVehiclesMock: IVehicle[] = [
 
 export {
   vehicleMock,
-  invalidVehicleMock,
   vehicleMockWithId,
   vehicleMockForChange,
-  vehicleMockForChangeWithId,
   allVehiclesMock
 }
 

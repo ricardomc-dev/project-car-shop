@@ -87,11 +87,14 @@ class VehicleService implements IVehicleService {
   }
 
   async updateVehicle(id: number, data: object): Promise<void> {
+    await this.readOneVehicle(id)
+
     const [updateVehicle] = await Vehicle.update(
       { ...data },
       { where: { id } }
     )
-    if (!updateVehicle) throw new Error('VehicleNotFound')
+
+    // return updateVehicle;
   }
 }
 

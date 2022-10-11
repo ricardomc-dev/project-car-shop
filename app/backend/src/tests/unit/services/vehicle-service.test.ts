@@ -1,13 +1,12 @@
 import { expect } from "chai";
 import * as sinon from 'sinon';
+
 import VehicleValidator from '../../../utils/vehicle-validator';
 import VehicleService from '../../../services/vehicle-service';
 import {
   vehicleMock,
-  invalidVehicleMock,
   vehicleMockWithId,
   vehicleMockForChange,
-  vehicleMockForChangeWithId,
   allVehiclesMock
 } from '../../mocks/vehicleMock';
 
@@ -19,7 +18,7 @@ describe('Test Vehicle Service', () => {
     sinon.stub(vehicleService, 'createVehicle').resolves(vehicleMockWithId);
     sinon.stub(vehicleService, 'readVehicles').resolves(allVehiclesMock);
     sinon.stub(vehicleService, 'readOneVehicle').resolves(vehicleMockWithId);
-    sinon.stub(vehicleService, 'updateVehicle').resolves();
+    sinon.stub(vehicleService, 'updateVehicle').resolves(undefined);
   })
 
   after(() => {
@@ -33,12 +32,11 @@ describe('Test Vehicle Service', () => {
     })
 
     it('Failed to create vehicle', async () => {
-      // try {
-			// 	// o "as any"(casting) abaixo pois o create não aceita um parâmetro inválido
-			// 	await vehicleService.createVehicle(invalidVehicleMock);
-			// } catch (error) {
-			// 	expect(error).to.be.instanceOf(error.isjoi.message);
-			// }
+      try {
+				await vehicleService.createVehicle({} as any);
+			} catch (error: any) {
+				expect(error).to.be.a('error');
+			}
     })
   })
 
@@ -61,32 +59,27 @@ describe('Test Vehicle Service', () => {
         await vehicleService.readOneVehicle(vehicleMockWithId.id);
 
       } catch (error: any) {
-        expect(error.message).to.be.deep.equal('VehicleFound');
+        expect(error).to.be.a('error');
       }
     })
   })
 
-  describe('Update One Vehicle', () => {
+  describe('Update Vehicle', () => {
     it('vehicle successfully updated', async () => {
+      const UM = 1
+      const data = await vehicleService.updateVehicle(UM, vehicleMockForChange);
 
+      expect(data).to.be.an('undefined')
     })
 
     it('failed to update vehicle', async () => {
+      try {
+        const DOIS = 2
+        await vehicleService.updateVehicle(DOIS, vehicleMockForChange);
 
+      } catch (error: any) {
+        expect(error).to.be.a('error');
+      }
     })
   })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 })
