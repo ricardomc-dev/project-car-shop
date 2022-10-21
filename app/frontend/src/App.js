@@ -2,12 +2,13 @@ import React from 'react'
 import './App.css';
 
 import Routes from './AppRoutes';
+import VehiclesProvider from './context/VehiclesProvider';
 
 function App() {
   return (
-    <div className="App">
+    <VehiclesProvider>
       <Routes />
-    </div>
+    </VehiclesProvider>
   );
 }
 
