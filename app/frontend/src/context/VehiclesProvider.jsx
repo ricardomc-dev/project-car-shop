@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import VehiclesContext from './VehiclesContext';
 
-function VehiclesProvider(children) {
+function VehiclesProvider({ children }) {
+  const [currentUser, setCurrentUser] = useState('')
 
   const contextValue = {
-
+    currentUser,
+    setCurrentUser
   }
 
   return (
