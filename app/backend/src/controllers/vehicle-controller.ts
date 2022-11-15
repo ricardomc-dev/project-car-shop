@@ -11,7 +11,7 @@ class VehicleController {
     try {
       const data = req.body as IVehicleBody;
       const newVehicle = await this.vehicleService.createVehicle(data)
-      return res.status(200).json(newVehicle)
+      return res.status(201).json(newVehicle)
     } catch (error) {
       next(error);
     }
@@ -29,7 +29,7 @@ class VehicleController {
   async readOneVehicle(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const vehicle = await this.vehicleService.readOneVehicle(id);
+      const vehicle = await this.vehicleService.readOneVehicle(Number(id));
       return res.status(200).json(vehicle);
     } catch (error) {
       next(error)
@@ -40,7 +40,7 @@ class VehicleController {
     try {
       const { id } = req.params;
       const data = req.body as IVehicleBody;
-      await this.vehicleService.updateVehicle(id, data);
+      await this.vehicleService.updateVehicle(Number(id), data);
       return res.status(200).json({ message: 'Veículo atualizado com sucesso!' });
     } catch (error) {
       next(error)

@@ -27,12 +27,10 @@ CarModel.init(
     brandId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      primaryKey: true,
     },
     groupId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      primaryKey: true,
     },
     urlImage: {
       allowNull: false,
@@ -43,11 +41,14 @@ CarModel.init(
     underscored: true,
     sequelize: db,
     timestamps: false,
-    modelName: 'car-models',
+    modelName: 'car_models',
   },
 );
 
-// CarModel.hasMany(Brand, { foreignKey: 'brand_id', as: 'brand' });
-// CarModel.hasMany(Group, { foreignKey: 'group_id', as: 'group' });
+Brand.hasMany(CarModel, { foreignKey: 'brandId', as: 'brand' })
+Group.hasMany(CarModel, { foreignKey: 'groupId', as: 'group' })
+
+CarModel.belongsTo(Brand, { foreignKey: 'brandId', as: 'brand' });
+CarModel.belongsTo(Group, { foreignKey: 'groupId', as: 'group' });
 
 export default CarModel;

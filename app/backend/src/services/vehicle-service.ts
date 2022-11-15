@@ -3,6 +3,8 @@ import Color from "../database/models/Color";
 import CarModel from "../database/models/CarModel";
 import { IVehicle, IVehicleBody } from "../interfaces/IVehicle";
 import { IVehicleService } from "../interfaces/IVehicleService";
+import Brand from "../database/models/Brand";
+import Group from "../database/models/Group";
 
 class VehicleService implements IVehicleService {
   constructor(private vehicleValidator: any) {
@@ -47,22 +49,52 @@ class VehicleService implements IVehicleService {
   }
 
   async readVehicles(): Promise<object[]> {
-    const vehicles = await Vehicle.findAll();
+    const vehicles = await Vehicle.findAll({
+      include: [
+        { model: CarModel,
+          as: 'model',
+          attributes: { exclude: ['id', 'brandId', 'groupId'] },
+          include: [
+            { model: Brand, as: 'brand', attributes: { exclude: ['id'] } },
+            { model: Group, as: 'group', attributes: { exclude: ['id'] } },
+          ],
+        },
+        { model: Color, as: 'color', attributes: { exclude: ['id'] } },
+      ],
+      attributes: { exclude: ['carModelId', 'colorId'] },
+    });
     return vehicles;
   }
 
-  async readOneVehicle(id: string): Promise<object | null> {
-    const vehicle = await Vehicle.findOne({ where: { id }});
+  async readOneVehicle(id: number | undefined): Promise<object | null> {
+    const vehicle = await Vehicle.findOne({ 
+      where: { id },
+      include: [
+        { model: CarModel,
+          as: 'model',
+          attributes: { exclude: ['id', 'brandId', 'groupId'] },
+          include: [
+            { model: Brand, as: 'brand', attributes: { exclude: ['id'] } },
+            { model: Group, as: 'group', attributes: { exclude: ['id'] } },
+          ],
+        },
+        { model: Color, as: 'color', attributes: { exclude: ['id'] } },
+      ],
+      attributes: { exclude: ['carModelId', 'colorId'] },
+    });
     if (!vehicle) throw new Error('VehicleNotFound')
     return vehicle;
   }
 
-  async updateVehicle(id: string, data: object): Promise<void> {
+  async updateVehicle(id: number, data: object): Promise<void> {
+    await this.readOneVehicle(id)
+
     const [updateVehicle] = await Vehicle.update(
       { ...data },
       { where: { id } }
     )
-    if (!updateVehicle) throw new Error('VehicleNotFound')
+
+    // return updateVehicle;
   }
 }
 

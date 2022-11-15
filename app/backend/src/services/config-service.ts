@@ -61,7 +61,13 @@ class ConfigService implements IConfigService {
   }
 
   async readCarModels(): Promise<object[]> {
-    const carModels = await CarModel.findAll();
+    const carModels = await CarModel.findAll({
+      include: [
+        { model: Brand, as: 'brand', attributes: { exclude: ['id'] } },
+        { model: Group, as: 'group', attributes: { exclude: ['id'] } },
+      ],
+      attributes: { exclude: ['brandId', 'groupId'] },
+    });
     return carModels;
   }
 }

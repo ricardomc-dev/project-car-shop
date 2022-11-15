@@ -1,8 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
 import { IVehicle } from '../../interfaces/IVehicle';
-// import CarModel from './CarModel';
-// import Color from './Color';
+import CarModel from './CarModel';
+import Color from './Color';
 
 class Vehicle extends Model implements IVehicle {
   public id!: number;
@@ -67,7 +67,10 @@ Vehicle.init(
   },
 );
 
-// Vehicle.hasMany(CarModel, { foreignKey: 'car_model_id', as: 'car_model' });
-// Vehicle.hasMany(Color, { foreignKey: 'color_id', as: 'color' });
+CarModel.hasMany(Vehicle, { foreignKey: 'carModelId', as: 'model' })
+Color.hasMany(Vehicle, { foreignKey: 'colorId', as: 'color' })
+
+Vehicle.belongsTo(CarModel, { foreignKey: 'carModelId', as: 'model' });
+Vehicle.belongsTo(Color, { foreignKey: 'colorId', as: 'color' });
 
 export default Vehicle;
