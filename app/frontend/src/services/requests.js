@@ -13,23 +13,23 @@ export const requestLogin = async (endpoint, body) => {
   return data;
 };
 
-export const requestData = async (endpoint) => {
-  const { data } = await api.get(endpoint);
+export const requestData = async (endpoint, headers) => {
+  const { data } = await api.get(endpoint, headers);
   return data;
 };
 
-export const createData = async (endpoint, body) => {
-  const { data } = await api.post(endpoint, body);
+export const createData = async (endpoint, body, headers) => {
+  const { data } = await api.post(endpoint, body, headers);
   return data;
 };
 
-export const updateData = async (endpoint, body) => {
-  const { data } = await api.put(endpoint, body);
+export const updateData = async (endpoint, body, headers) => {
+  const { data } = await api.put(endpoint, body, headers);
   return data;
 };
 
-export const deleteData = async (endpoint) => {
-  const { data } = await api.delete(endpoint);
+export const deleteData = async (endpoint, headers) => {
+  const { data } = await api.delete(endpoint, headers);
   return data;
 };
 
