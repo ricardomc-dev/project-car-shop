@@ -29,8 +29,8 @@ class UserService {
     if (!user) {
       throw new Error('Invalid login');
     }
-
-    const token = this.token.generate({ id: user.id, role: user.role });
+    console.log(user.name)
+    const token = this.token.generate({ name: user.name, role: user.role });
 
     return token;
   }

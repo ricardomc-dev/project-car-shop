@@ -1,8 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Header } from '../components/Header';
 
 function Vehicles() {
+  const navigate = useNavigate();
+
   return(
-    <h1>Vehicles</h1>
+    <>
+      <Header />
+      <h1>Vehicles</h1>
+    </>
   )
 }
 

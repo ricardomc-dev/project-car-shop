@@ -12,7 +12,7 @@ const jwtConfig:object = {
 class Token {
 
   generate(data: IUser): string {
-    const token = jwt.sign({ id: data.id, role: data.role }, JWT_SECRET, jwtConfig);
+    const token = jwt.sign({ name: data.name, role: data.role }, JWT_SECRET, jwtConfig);
 
     return token;
   }

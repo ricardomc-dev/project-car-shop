@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import VehiclesContext from '../context/VehiclesContext';
+import React from 'react';
+// import VehiclesContext from '../context/VehiclesContext';
 
 function Detail() {
   return(

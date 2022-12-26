@@ -17,7 +17,7 @@ function AdminConfig() {
     if(config.headers.authorization) {
       apiColorRequest()
     }
-  }, [config])
+  }, [config, setColorList])
 
   // useEffect(() => {
   //   const { token } = JSON.parse(localStorage.getItem('user'))
