@@ -8,7 +8,6 @@ import { CustomInput } from '../components/Input';
 import { Button } from '../components/Button';
 import { Link } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
-// import { requestLogin } from '../services/requests';
 
 const loginSchema = object({
   email: string().required('E-mail obrigatório').email('E-mail inválido'),
@@ -39,14 +38,14 @@ function Login() {
 
   return (
     <div className="flex h-screen">
-      <div className="md:hidden lg:flex flex-1 flex-col justify-between items-center">
+      <div className="md:hidden mt-20 lg:flex flex-1 flex-col justify-between items-center">
         <img
-          className="lg:w-[80%] xl:w-[70%]"
+          className="lg:w-[70%] xl:w-[70%]"
           src={carShopLogo}
           alt="Placa Car shop atrás de carro antigo"
         />
       </div>
-      <div className="md:w-full lg:max-w-2xl flex flex-col items-center p-16 bg-green-900">
+      <div className="md:w-2/5 lg:max-w-2xl flex flex-col items-center p-16 bg-green-900">
         
         <div className="sm:hidden xl:block bg-green w-full h-px mb-12"></div>
         <h1 className="text-6xl mb-6 text-white">Login</h1>
@@ -74,10 +73,12 @@ function Login() {
           />
 
           <div className="text-white flex items-center justify-between">
-            Ainda não tem conta?
-            <Link to="/register" className="text-white hover:text-green">
-              Crie agora
-            </Link>
+            <div>
+              <p>Ainda não tem conta?</p>
+              <Link to="/register" className="text-green hover:text-green">
+                Crie agora
+              </Link>
+            </div>
             <Button title="Entrar" icon={<FiSend />} />
           </div>
         </form>
