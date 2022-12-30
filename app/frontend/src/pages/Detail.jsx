@@ -1,11 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { Header } from '../components/Header';
 import AuthContext from '../context/AuthContext';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import {
+  addIdToLocalSto,
+  deleteIdFromLocalSto,
+  getLocalStorageInfo } from '../services/localStorage';
+
+import shareIcon from '../assets/shareIcon.svg';
+import whiteHeartIcon from '../assets/whiteHeartIcon.svg';
+import blackHeartIcon from '../assets/blackHeartIcon.svg';
 
 function Detail() {
   const { id } = useParams();
@@ -36,11 +41,21 @@ function Detail() {
     />
   );
 
+
+  useEffect(() => {
+    if (localStorage.getItem('user@favorites')) {
+      console.log(getLocalStorageInfo('user@favorites').some((car) => car.carId === Number(id)))
+      return setIsFavorite(getLocalStorageInfo('user@favorites')
+        .some((car) => car.carId === Number(id)));
+    }
+  }, [id]);
+
   const selectedVehicle = filtedVehicles.filter((item) => item.id === Number(id))
 
   console.log(selectedVehicle)
 
   const { 
+    id: carId,
     color: { colorName },
     mileage,
     model: { 
@@ -53,9 +68,26 @@ function Detail() {
     year
   } = selectedVehicle[0]
 
- 
 
-  console.log(colorName)
+  function handleFavoriteItem() {
+    const favoriteCar = {
+      carId,
+      mileage,
+      carModelName,
+      urlImage,
+      price,
+      year
+    }
+      
+    if (!isFavorite) {
+      addIdToLocalSto(favoriteCar, 'user@favorites');
+      setIsFavorite(true);
+    } else {
+      deleteIdFromLocalSto(Number(id), 'user@favorites');
+      setIsFavorite(false);
+    }
+  }
+
   return(
     <main className="w-full">
       <Header />
@@ -64,7 +96,7 @@ function Detail() {
             className="shadow-[0_0_36px_rgba(0,0,0,0.3)] w-full h-3/4 flex rounded"
           >
               <img
-                className="rounded-t-lg h-40   "
+                className="rounded-t-lg h-96   "
                 src={ `${urlImage}` }
                 alt={ carModelName }
               />
@@ -89,6 +121,24 @@ function Detail() {
                     </p>
                   </div>
                 </div>
+              </div>
+              <div className="w-full flex flex-row justify-end ml-4">
+                <CopyToClipboard text={window.location.href}>
+                  <button
+                    className="mr-4"
+                    type="button"
+                    onClick={ () => setIsLinkCopied(true) }
+                  >
+                    { buttonShareIcon }
+                  </button>
+                </CopyToClipboard>
+                <button
+                  type="button"
+                  onClick={ () => handleFavoriteItem() }
+                >
+                  { isFavorite ? blackHeart : whiteHeart }
+                </button>
+                { isLinkCopied && <span>Link copied!</span> }
               </div>
           </div>
         </div>

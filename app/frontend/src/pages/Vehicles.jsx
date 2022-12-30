@@ -1,12 +1,9 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import AuthContext from '../context/AuthContext';
-// import VehicleCard  from '../components/VehicleCard';
-import { setToken, requestData } from '../services/requests';
 
 function Vehicles() {
-  const navigate = useNavigate();
   const { filtedVehicles } = useContext(AuthContext);
   
   console.log(filtedVehicles)
