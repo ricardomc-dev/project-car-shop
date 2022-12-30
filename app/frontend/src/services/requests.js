@@ -5,7 +5,7 @@ export const api = axios.create({
 });
 
 export const setToken = (token) => {
-  api.defaults.headers.common.Authorization = token;
+  api.defaults.headers.common['Authorization'] = `${token}`;
 };
 
 export const requestLogin = async (endpoint, body) => {
@@ -13,8 +13,8 @@ export const requestLogin = async (endpoint, body) => {
   return data;
 };
 
-export const requestData = async (endpoint, headers) => {
-  const { data } = await api.get(endpoint, headers);
+export const requestData = async (endpoint) => {
+  const { data } = await api.get(endpoint);
   return data;
 };
 
@@ -32,5 +32,3 @@ export const deleteData = async (endpoint, headers) => {
   const { data } = await api.delete(endpoint, headers);
   return data;
 };
-
-export default api;

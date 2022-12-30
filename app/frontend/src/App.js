@@ -1,15 +1,15 @@
 import React from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import VehiclesProvider from './context/VehiclesProvider';
+// import VehiclesProvider from './context/VehiclesProvider';
 import AuthProvider from './context/AuthProvider';
 import Routes from './AppRoutes';
 
 
 function App() {
   return (
-    <VehiclesProvider>
-      <AuthProvider>
+    <AuthProvider>
+      {/* <VehiclesProvider> */}
         <Routes />
         <ToastContainer
             position="top-right"
@@ -23,8 +23,8 @@ function App() {
             pauseOnHover
             theme="dark"
           />
-      </AuthProvider>
-    </VehiclesProvider>
+      {/* </VehiclesProvider> */}
+    </AuthProvider>
   );
 }
 

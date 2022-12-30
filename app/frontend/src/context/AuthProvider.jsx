@@ -5,13 +5,17 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import jwt_decode from 'jwt-decode';
-import api from '../services/requests';
+import { api, setToken, requestData } from '../services/requests';
 import AuthContext from './AuthContext';
 
 
 function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
+  const [vehiclesList, setVehiclesList] = useState([]);
+  const [filtedVehicles, setFiltedVehicles] = useState([]);
+  const [colorList, setColorList] = useState([]);
+  const [modelsList, setModelsList] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem('user@token');
@@ -26,8 +30,6 @@ function AuthProvider({ children }) {
         email,
         password,
       });
-
-      console.log(data)
 
       if (!data.error && data.token) {
         setInformation(data.token);
@@ -50,7 +52,7 @@ function AuthProvider({ children }) {
 
     localStorage.setItem('user@token', token);
     localStorage.setItem('user@name', name);
-    api.defaults.headers.common['Authorization'] = `${token}`;
+    // setToken(token);
     if (role === 'administrator') {
       navigate('/admin/manage')
     } else if (role === 'seller') {
@@ -70,10 +72,31 @@ function AuthProvider({ children }) {
     navigate('/');
   }
 
+  useEffect(() => {
+    const token = localStorage.getItem('user@token');
+    if (!token) return signOut();
+  api.defaults.headers.common['Authorization'] = `${token}`;
+
+    async function getVehicles() {
+      const response = await requestData('/vehicles')
+      setVehiclesList(response);
+    }
+    getVehicles();
+    console.log(vehiclesList)
+  },[])
+
+  useEffect(() => {
+    setFiltedVehicles(vehiclesList)
+  },[vehiclesList])
+
   const contextValue = {
     user,
     signIn,
-    signOut
+    signOut,
+    vehiclesList,
+    setVehiclesList,
+    filtedVehicles,
+    setFiltedVehicles
   }
 
   return (
