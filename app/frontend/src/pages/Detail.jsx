@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { Header } from '../components/Header';
-import AuthContext from '../context/AuthContext';
+import AppContext from '../context/AppContext';
 import {
   addIdToLocalSto,
   deleteIdFromLocalSto,
@@ -14,7 +14,7 @@ import blackHeartIcon from '../assets/blackHeartIcon.svg';
 
 function Detail() {
   const { id } = useParams();
-  const { filtedVehicles } = useContext(AuthContext);
+  const { filtedVehicles } = useContext(AppContext);
   const [isLinkCopied, setIsLinkCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 

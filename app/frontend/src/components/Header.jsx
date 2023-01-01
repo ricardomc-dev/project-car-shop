@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import logoCar from '../assets/logocar.png'
 import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
+import AuthContext from '../context/AppContext';
 import { BsSuitHeartFill } from 'react-icons/bs'
-// import { Avatar } from '../Avatar';
+import Avatar from '../assets/profileIcon.svg';
 
 export function Header() {
   const { signOut, user } = useContext(AuthContext)
@@ -29,7 +29,11 @@ export function Header() {
               <p onClick={signOut}>sair </p> <FiLogOut />
             </div>
           </div>
-          {/* <Avatar /> */}
+          <img
+            className="bg-white inline-block h-10 w-10 rounded-full ring-2 ring-white"
+            src={ Avatar }
+            alt=""
+          />
         </div>
       </div>
     </div>

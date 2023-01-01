@@ -1,12 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
-import AuthContext from '../context/AuthContext';
+import AppContext from '../context/AppContext';
 
 function Vehicles() {
-  const { filtedVehicles } = useContext(AuthContext);
+  const { filtedVehicles, signOut } = useContext(AppContext);
   
-  console.log(filtedVehicles)
+  useEffect(() => {
+    const token = localStorage.getItem('user@token');
+    if (!token) return signOut();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return(
     <main className="w-full">
       <Header />

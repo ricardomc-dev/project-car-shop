@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import jwt_decode from 'jwt-decode';
 import { api, setToken, requestData } from '../services/requests';
-import AuthContext from './AuthContext';
+import AppContext from './AppContext';
 
 
-function AuthProvider({ children }) {
+function AppProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [vehiclesList, setVehiclesList] = useState([]);
@@ -100,10 +100,10 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={ contextValue }>
+    <AppContext.Provider value={ contextValue }>
       {children}
-    </AuthContext.Provider>
+    </AppContext.Provider>
   )
 }
 
-export default AuthProvider;
+export default AppProvider;

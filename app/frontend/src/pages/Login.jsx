@@ -7,7 +7,7 @@ import carShopLogo from '../assets/classic-car-shop-logo.png';
 import { CustomInput } from '../components/Input';
 import { Button } from '../components/Button';
 import { Link } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
+import AppContext from '../context/AppContext';
 
 const loginSchema = object({
   email: string().required('E-mail obrigatório').email('E-mail inválido'),
@@ -17,7 +17,7 @@ const loginSchema = object({
 }).required();
 
 function Login() {
-  const { signIn } = useContext(AuthContext)
+  const { signIn } = useContext(AppContext)
 
   const [isShowingPassword, setIsShowingPassword] = useState(false);
   const {

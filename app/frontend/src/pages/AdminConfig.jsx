@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState  } from 'react';
-import VehiclesContext from '../context/VehiclesContext';
+import AppContext from '../context/AppContext';
 import { createData, requestData } from '../services/requests';
 
 function AdminConfig() {
-  const { colorList, setColorList, config } = useContext(VehiclesContext)
+  const { colorList, setColorList, config } = useContext(AppContext)
   const [newColor, setNewColor] = useState('');
   // const [config, setCofig] = useState( { headers: '' } );
 
