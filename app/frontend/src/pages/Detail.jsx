@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { Header } from '../components/Header';
 import AppContext from '../context/AppContext';
+import { toast } from 'react-toastify';
+import {api, setToken } from '../services/requests';
 import {
   addIdToLocalSto,
   deleteIdFromLocalSto,
@@ -52,7 +54,7 @@ function Detail() {
 
   const selectedVehicle = filtedVehicles.filter((item) => item.id === Number(id))
 
-  console.log(selectedVehicle)
+  console.log(selectedVehicle[0])
 
   const { 
     id: carId,
@@ -67,6 +69,8 @@ function Detail() {
     price,
     year
   } = selectedVehicle[0]
+
+  console.log(carModelName)
 
 
   function handleFavoriteItem() {
@@ -88,6 +92,23 @@ function Detail() {
     }
   }
 
+  async function handleReserve () {
+    try {
+      const { status } = await api.post('/register', {
+        sellerName: "Edson Nascimento",
+        vehicleId: id,
+        status: "Reservado"
+      });
+      if (status === 201) {
+        toast.success('Veículo reservado com sucesso');
+      }
+    } catch (error) {
+      console.log(error);
+
+      toast.warning(error.response.data.error);
+    }
+  }
+
   return(
     <main className="w-full">
       <Header />
@@ -103,14 +124,14 @@ function Detail() {
               <div className="w-full flex items-center justify-between">
                 <div className="p-2 flex flex-col">
                   <div>
-                    <p className="text-2xl font-bold text-gray-600 mt-1">
-                      { carModelName }
-                    </p>
-                    <p className="text-2xl font-bold mb-2 text-orange-300">
+                    {/* <p className="text-2xl font-bold text-gray-600 mt-1">
+                      { `${brandName}` }
+                    </p> */}
+                    {/* <p className="text-2xl font-bold mb-2 text-orange-300">
                       <small className="text-2xl">
                         {`R$ ${price}`}
                       </small>
-                    </p>
+                    </p> */}
                   </div>
                   <div className=" text-green mt-4">
                     <p className="flex items-center gap-1">
@@ -118,6 +139,12 @@ function Detail() {
                     </p>
                     <p className="flex items-center gap-1 ">
                       <b>Ano Fabricação:</b> {year}
+                    </p>
+                    <p className="flex items-center gap-1 ">
+                      <b>Cor:</b> {colorName}
+                    </p>
+                    <p className="flex items-center gap-1 ">
+                      <b>Tipo:</b> {groupName}
                     </p>
                   </div>
                 </div>
@@ -139,6 +166,13 @@ function Detail() {
                   { isFavorite ? blackHeart : whiteHeart }
                 </button>
                 { isLinkCopied && <span>Link copied!</span> }
+                <button
+                  className="text-lg flex items-center bg-green p-4 rounded-xl min-w-[00px] gap-3 text-white justify-center "
+                  type="button"
+                  onClick={ () => handleReserve() }
+                >
+                  Reservar
+                </button>
               </div>
           </div>
         </div>
